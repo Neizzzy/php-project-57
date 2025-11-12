@@ -1,0 +1,39 @@
+name: PHP CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: xdebug
+
+      - name: Install
+        run: make install
+
+      - name: Run linter
+        run: make lint
+
+      - name: Run test coverage
+        run: make test-coverage
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=Neizzzy_php-project-57
+            -Dsonar.organization=neizzzy
+            -Dsonar.sources=app/,config/,database/,routes/,bootstrap/
+            -Dsonar.tests=tests/
+            -Dsonar.exclusions=node_modules/**,vendor/**,storage/**,public/**,resources/**
+            -Dsonar.php.coverage.reportPaths=build/logs/clover.xml
+            -Dsonar.language=php
+            -Dsonar.sourceEncoding=UTF-8
