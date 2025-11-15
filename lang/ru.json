@@ -1,0 +1,21 @@
+{
+    "Password": "Пароль",
+    "Name": "Имя",
+    "Confirm Password": "Подтверждение",
+    "Register": "Регистрация",
+    "Already registered?": "Уже зарегистрированы?",
+    "You have successfully registered!": "Вы успешно зарегистрировались!",
+    "Remember me": "Запомнить меня",
+    "Forgot your password?": "Забыли пароль?",
+    "Log in": "Войти",
+    "Login": "Вход",
+    "Log Out": "Выйти",
+    "You have logged out": "Вы вышли из аккаунта",
+    "You have successfully logged in": "Вы успешно вошли в аккаунт",
+    "Ops! Something went wrong:": "Упс! Что-то пошло не так:",
+    "Email Password Reset Link": "Отправить ссылку для сброса пароля",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Забыли пароль? Просто укажите свой email, и мы вышлем вам ссылку для сброса пароля.",
+    "TASK<br>MANAGER": "МЕНЕДЖЕР<br>ЗАДАЧ",
+    "Home": "Главная",
+    "Task Manager": "Менеджер Задач"
+}
