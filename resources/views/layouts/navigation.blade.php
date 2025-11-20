@@ -20,13 +20,12 @@
                 @guest()
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <div class="flex gap-2 items-center">
-                        <a href="{{ route('login') }}" class="px-3 py-1 rounded-md font-medium bg-orange-500 hover:bg-orange-600 transition delay-50 duration-300 text-white dark:text-gray-800 dark:bg-gray-200">
+                        <x-link-button :href="route('login')">
                             {{ __('Login') }}
-                        </a>
-
-                        <a href="{{ route('register') }}" class="px-3 py-1 rounded-md font-medium bg-orange-500 hover:bg-orange-600 transition delay-50 duration-300 text-white dark:text-gray-800 dark:bg-gray-200">
+                        </x-link-button>
+                        <x-link-button :href="route('register')">
                             {{ __('Register') }}
-                        </a>
+                        </x-link-button>
                     </div>
                 </div>
                 @endguest
