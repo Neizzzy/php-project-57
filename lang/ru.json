@@ -16,6 +16,19 @@
     "Email Password Reset Link": "Отправить ссылку для сброса пароля",
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Забыли пароль? Просто укажите свой email, и мы вышлем вам ссылку для сброса пароля.",
     "TASK<br>MANAGER": "МЕНЕДЖЕР<br>ЗАДАЧ",
+    "Task Manager": "Менеджер Задач",
     "Home": "Главная",
-    "Task Manager": "Менеджер Задач"
+    "Statuses": "Статусы",
+    "Create status": "Создать статус",
+    "Edit status": "Изменение статуса",
+    "Status successfully created": "Статус успешно создан",
+    "Status successfully updated": "Статус успешно изменен",
+    "Status successfully deleted": "Статус успешно удален",
+    "Creation date": "Дата создания",
+    "Actions": "Действия",
+    "Create": "Создать",
+    "Edit": "Изменить",
+    "Delete": "Удалить",
+    "Update": "Обновить",
+    "Are you sure?": "Вы уверены?"
 }
