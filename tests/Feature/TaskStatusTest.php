@@ -29,7 +29,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_task_status_can_create_user(): void
+    public function test_user_can_create_task_status(): void
     {
         $response = $this->actingAs($this->user)
             ->get(route('task_statuses.create'));
@@ -37,7 +37,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_task_status_cannot_create_guest(): void
+    public function test_guest_cannot_create_task_status(): void
     {
         $response = $this->actingAsGuest()
             ->get(route('task_statuses.create'));
@@ -45,7 +45,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_task_status_can_store_user(): void
+    public function test_user_can_store_task_status(): void
     {
         $data = TaskStatus::factory()->make()->only('name');
 
@@ -57,7 +57,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
-    public function test_task_status_cannot_store_guest(): void
+    public function test_guest_cannot_store_task_status(): void
     {
         $data = TaskStatus::factory()->make()->only('name');
 
@@ -67,7 +67,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_task_status_store_validation(): void
+    public function test_task_status_validation(): void
     {
         $response = $this->actingAs($this->user)
             ->post(route('task_statuses.store'), []);
@@ -79,7 +79,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseEmpty('task_statuses');
     }
 
-    public function test_task_status_can_edit_user(): void
+    public function test_user_can_edit_task_status(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -89,7 +89,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_task_status_cannot_edit_guest(): void
+    public function test_guest_cannot_edit_task_status(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -99,7 +99,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_task_status_can_update_user(): void
+    public function test_user_can_update_task_status(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $data = TaskStatus::factory()->make()->only('name');
@@ -112,7 +112,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
-    public function test_task_status_cannot_update_guest(): void
+    public function test_guest_cannot_update_task_status(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $originalData = $taskStatus->only(['name', 'user_id']);
