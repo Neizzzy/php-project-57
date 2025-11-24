@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTOs\TaskStatusDTO;
 use App\Models\TaskStatus;
 use Illuminate\Support\Collection;
 
@@ -12,17 +13,14 @@ class TaskStatusService
         return TaskStatus::orderBy('id', 'ASC')->get();
     }
 
-    public function create(array $data): void
+    public function create(TaskStatusDTO $taskStatusDto): void
     {
-        TaskStatus::create([
-            'name' => $data['name'],
-            'user_id' => auth()->id(),
-        ]);
+        auth()->user()->taskStatuses()->create($taskStatusDto->toArray());
     }
 
-    public function update(array $data, TaskStatus $taskStatus): void
+    public function update(TaskStatusDTO $taskStatusDto, TaskStatus $taskStatus): void
     {
-        $taskStatus->update($data);
+        $taskStatus->update($taskStatusDto->toArray());
     }
 
     public function delete(TaskStatus $taskStatus): void
