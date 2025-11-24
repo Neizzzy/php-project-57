@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\TaskStatusDTO;
 use App\Http\Requests\TaskStatus\StoreRequest;
 use App\Http\Requests\TaskStatus\UpdateRequest;
 use App\Models\TaskStatus;
@@ -45,9 +46,8 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('create', TaskStatus::class);
 
-        $validated = $request->validated();
-
-        $this->service->create($validated);
+        $taskStatusDto = TaskStatusDTO::fromArray($request->validated());
+        $this->service->create($taskStatusDto);
 
         flash(__('Status successfully created'))->success();
         return redirect()->route('task_statuses.index');
@@ -70,9 +70,8 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('update', $taskStatus);
 
-        $validated = $request->validated();
-
-        $this->service->update($validated, $taskStatus);
+        $taskStatusDto = TaskStatusDTO::fromArray($request->validated());
+        $this->service->update($taskStatusDto, $taskStatus);
 
         flash(__('Status successfully updated'))->success();
         return redirect()->route('task_statuses.index');
