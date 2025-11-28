@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTOs\TaskStatusDTO;
 use App\Models\TaskStatus;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 
 class TaskStatusService
@@ -23,8 +24,13 @@ class TaskStatusService
         $taskStatus->update($taskStatusDto->toArray());
     }
 
-    public function delete(TaskStatus $taskStatus): void
+    public function delete(TaskStatus $taskStatus): bool
     {
-        $taskStatus->delete();
+        try {
+            $taskStatus->delete();
+            return true;
+        } catch (QueryException) {
+            return false;
+        }
     }
 }
