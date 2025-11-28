@@ -37,6 +37,6 @@ class TaskStatusPolicy
      */
     public function delete(User $user, TaskStatus $taskStatus): bool
     {
-        return $user->id === $taskStatus->user_id;
+        return true;
     }
 }
