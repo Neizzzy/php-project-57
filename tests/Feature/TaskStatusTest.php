@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\TaskStatus;
+use App\Models\Task;
 use App\Models\User;
-use Illuminate\Console\View\Components\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -126,7 +126,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $originalData);
     }
 
-    public function test_user_can_delete_task_status(): void
+    public function test_user_can_delete_status_without_tasks(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -136,6 +136,19 @@ class TaskStatusTest extends TestCase
         $response->assertRedirect(route('task_statuses.index'));
 
         $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
+    }
+
+    public function test_user_cannot_delete_status_with_tasks()
+    {
+        $taskStatus = TaskStatus::factory()->create();
+        Task::factory()->create(['status_id' => $taskStatus->id]);
+
+        $response = $this->actingAs($this->user)
+            ->delete(route('task_statuses.destroy', $taskStatus));
+
+        $response->assertRedirect(route('task_statuses.index'));
+
+        $this->assertDatabaseHas('task_statuses', ['id' => $taskStatus->id]);
     }
 
     public function test_guest_cannot_delete_task_status(): void
