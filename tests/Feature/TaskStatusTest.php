@@ -115,7 +115,7 @@ class TaskStatusTest extends TestCase
     public function test_guest_cannot_update_task_status(): void
     {
         $taskStatus = TaskStatus::factory()->create();
-        $originalData = $taskStatus->only(['name', 'user_id']);
+        $originalData = $taskStatus->only('name');
         $data = TaskStatus::factory()->make()->only('name');
 
         $response = $this->actingAsGuest()
@@ -126,9 +126,9 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $originalData);
     }
 
-    public function test_creator_can_destroy_their_task_status(): void
+    public function test_user_can_delete_task_status(): void
     {
-        $taskStatus = TaskStatus::factory()->create(['user_id' => $this->user->id]);
+        $taskStatus = TaskStatus::factory()->create();
 
         $response = $this->actingAs($this->user)
             ->delete(route('task_statuses.destroy', $taskStatus));
@@ -136,19 +136,6 @@ class TaskStatusTest extends TestCase
         $response->assertRedirect(route('task_statuses.index'));
 
         $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
-    }
-
-    public function test_other_user_cannot_delete_task_status(): void
-    {
-        $author = User::factory()->create();
-        $taskStatus = TaskStatus::factory()->create(['user_id' => $author->id]);
-
-        $response = $this->actingAs($this->user)
-            ->delete(route('task_statuses.destroy', $taskStatus));
-
-        $response->assertStatus(403);
-
-        $this->assertDatabaseHas('task_statuses', ['id' => $taskStatus->id]);
     }
 
     public function test_guest_cannot_delete_task_status(): void
