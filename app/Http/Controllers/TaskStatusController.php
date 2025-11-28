@@ -84,9 +84,10 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('delete', $taskStatus);
 
-        $this->service->delete($taskStatus);
+        $this->service->delete($taskStatus) ?
+            flash(__('Status successfully deleted'))->success() :
+            flash(__('Failed to delete status'))->error();
 
-        flash(__('Status successfully deleted'))->success();
         return redirect()->route('task_statuses.index');
     }
 }
