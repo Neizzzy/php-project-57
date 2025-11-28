@@ -25,4 +25,11 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:255|unique:task_statuses,name',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => __('A status with this name already exists'),
+        ];
+    }
 }
