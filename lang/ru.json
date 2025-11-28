@@ -25,6 +25,7 @@
     "Status successfully created": "Статус успешно создан",
     "Status successfully updated": "Статус успешно изменен",
     "Status successfully deleted": "Статус успешно удален",
+    "Failed to delete status": "Не удалось удалить статус",
     "Creation date": "Дата создания",
     "Actions": "Действия",
     "Create": "Создать",
