@@ -14,6 +14,9 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                        {{ __('Tasks') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')">
                         {{ __('Statuses') }}
                     </x-nav-link>
@@ -80,6 +83,9 @@
             <div class="pt-2 pb-3 space-y-1">
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Home') }}
+                </x-nav-link>
+                <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                    {{ __('Tasks') }}
                 </x-nav-link>
                 <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')">
                     {{ __('Statuses') }}
