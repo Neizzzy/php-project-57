@@ -15,7 +15,7 @@ class TaskStatusService
 
     public function create(TaskStatusDTO $taskStatusDto): void
     {
-        auth()->user()->taskStatuses()->create($taskStatusDto->toArray());
+        TaskStatus::create($taskStatusDto->toArray());
     }
 
     public function update(TaskStatusDTO $taskStatusDto, TaskStatus $taskStatus): void
