@@ -1,4 +1,5 @@
 {
+    "A status with this name already exists": "Статус с таким именем уже существует",
     "Password": "Пароль",
     "Name": "Имя",
     "Confirm Password": "Подтверждение",
@@ -30,5 +31,18 @@
     "Edit": "Изменить",
     "Delete": "Удалить",
     "Update": "Обновить",
-    "Are you sure?": "Вы уверены?"
+    "Are you sure?": "Вы уверены?",
+    "Tasks": "Задачи",
+    "Create task": "Создать задачу",
+    "Edit task": "Изменение задачи",
+    "Status": "Статус",
+    "Author": "Автор",
+    "Executor": "Исполнитель",
+    "Task successfully created": "Задача успешно создана",
+    "Task successfully updated": "Задача успешно изменена",
+    "Task successfully deleted": "Задача успешно удалена",
+    "View task": "Просмотр задачи",
+    "Description": "Описание",
+    "Select status": "Выберите статус",
+    "Select executor": "Выберите исполнителя"
 }
