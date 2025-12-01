@@ -25,7 +25,7 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('viewAny', TaskStatus::class);
 
-        $statuses = $this->service->getAll();
+        $statuses = $this->service->getAllPaginated();
         return view('task-statuses.index', compact('statuses'));
     }
 

@@ -72,5 +72,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="mt-2">
+            {{ $statuses->links() }}
+        </div>
     </div>
 @endsection

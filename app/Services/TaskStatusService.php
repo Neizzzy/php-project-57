@@ -4,14 +4,15 @@ namespace App\Services;
 
 use App\DTOs\TaskStatusDTO;
 use App\Models\TaskStatus;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 
 class TaskStatusService
 {
-    public function getAll(): Collection
+    public function getAllPaginated($per = 15): LengthAwarePaginator
     {
-        return TaskStatus::orderBy('id', 'ASC')->get();
+        return TaskStatus::orderBy('id', 'ASC')->paginate($per);
     }
 
     public function create(TaskStatusDTO $taskStatusDto): void
