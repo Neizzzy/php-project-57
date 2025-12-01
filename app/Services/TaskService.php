@@ -6,7 +6,7 @@ use App\DTOs\TaskDTO;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class TaskService
@@ -31,9 +31,9 @@ class TaskService
         auth()->user()->tasks()->create($taskDto->toArray());
     }
 
-    public function update(TaskDTO $dto, Task $task): void
+    public function update(TaskDTO $taskDto, Task $task): void
     {
-        $task->update($dto->toArray());
+        $task->update($taskDto->toArray());
     }
 
     public function delete(Task $task): void
