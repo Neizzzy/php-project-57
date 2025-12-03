@@ -25,7 +25,8 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status_id' => 'required|integer',
-            'assigned_to_id' => 'nullable|integer'
+            'assigned_to_id' => 'nullable|integer',
+            'labels' => 'nullable|array',
         ];
     }
 }
