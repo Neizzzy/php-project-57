@@ -2,13 +2,16 @@
 
 namespace App\DTOs;
 
+use Illuminate\Support\Collection;
+
 class TaskDTO
 {
     public function __construct(
         public readonly string $name,
         public readonly ?string $description,
         public readonly int $status_id,
-        public readonly ?int $assigned_to_id
+        public readonly ?int $assigned_to_id,
+        public readonly Collection $labelIds
     ) {
     }
 
@@ -18,7 +21,8 @@ class TaskDTO
             name: $data['name'],
             description: $data['description'],
             status_id: $data['status_id'],
-            assigned_to_id: $data['assigned_to_id']
+            assigned_to_id: $data['assigned_to_id'],
+            labelIds: collect($data['labels'] ?? [])
         );
     }
 
@@ -29,6 +33,7 @@ class TaskDTO
             'description' => $this->description,
             'status_id' => $this->status_id,
             'assigned_to_id' => $this->assigned_to_id,
+            'labelIds' => $this->labelIds,
         ];
     }
 }
