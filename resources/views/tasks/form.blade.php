@@ -18,7 +18,7 @@
         <select name="status_id" id="status_id" class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
             <option value="">{{ __('Select status') }}</option>
             @foreach($statuses as $status)
-                <option value="{{ $status->id }}" @selected(old('status_id', $task->status_id ?? '') === $status->id)>
+                <option value="{{ $status->id }}" @selected(old('status_id', $task->status_id ?? '') == $status->id)>
                     {{ $status->name }}
                 </option>
             @endforeach
@@ -31,11 +31,23 @@
         <select name="assigned_to_id" id="assigned_to_id" class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
             <option value="">{{ __('Select executor') }}</option>
             @foreach($users as $user)
-                <option value="{{ $user->id }}" @selected(old('assigned_to_id', $task->assigned_to_id ?? '') === $user->id)>
+                <option value="{{ $user->id }}" @selected(old('assigned_to_id', $task->assigned_to_id ?? '') == $user->id)>
                     {{ $user->name }}
                 </option>
             @endforeach
         </select>
         <x-input-error :messages="$errors->get('assigned_to_id')" />
+    </div>
+
+    <div>
+        <x-input-label for="labels" :value="__('Labels')" />
+        <select name="labels[]" id="labels" multiple class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
+            @foreach($labels as $label)
+                <option value="{{ $label->id }}" @selected(isset($task) ? $task->labels->contains($label->id) : in_array($label->id, old('labels', [])))>
+                    {{ $label->name }}
+                </option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('labels')" />
     </div>
 </div>
