@@ -80,7 +80,7 @@ class TaskTest extends TestCase
     public function test_task_validation(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('tasks.store'), []);
+            ->post(route('tasks.store'), ['name' => '', 'status_id' => '']);
 
         $response->assertRedirect();
 
@@ -119,7 +119,7 @@ class TaskTest extends TestCase
 
         $response->assertRedirect(route('tasks.index'));
 
-        $this->assertDatabaseHas('tasks', $data);
+        $this->assertDatabaseHas('tasks', ['id' => $task->id, ...$data]);
     }
 
     public function test_guest_cannot_update_task(): void

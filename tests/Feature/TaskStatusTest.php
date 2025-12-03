@@ -65,16 +65,18 @@ class TaskStatusTest extends TestCase
             ->post(route('task_statuses.store'), $data);
 
         $response->assertStatus(403);
+
+        $this->assertDatabaseEmpty('task_statuses');
     }
 
     public function test_task_status_validation(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('task_statuses.store'), []);
+            ->post(route('task_statuses.store'), ['name' => '']);
 
         $response->assertRedirect();
 
-        $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors(['name']);
 
         $this->assertDatabaseEmpty('task_statuses');
     }
@@ -109,7 +111,7 @@ class TaskStatusTest extends TestCase
 
         $response->assertRedirect(route('task_statuses.index'));
 
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->assertDatabaseHas('task_statuses', ['id' => $taskStatus->id, ...$data]);
     }
 
     public function test_guest_cannot_update_task_status(): void
