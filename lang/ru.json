@@ -45,5 +45,11 @@
     "View task": "Просмотр задачи",
     "Description": "Описание",
     "Select status": "Выберите статус",
-    "Select executor": "Выберите исполнителя"
+    "Select executor": "Выберите исполнителя",
+    "Labels": "Метки",
+    "Create label": "Создать метку",
+    "Label successfully created": "Метка успешно создана",
+    "Label successfully updated": "Метка успешно изменена",
+    "Label successfully deleted": "Метка успешно удалена",
+    "Failed to delete label": "Не удалось удалить метку"
 }
