@@ -39,8 +39,9 @@ class TaskController extends Controller
 
         $users = $this->taskService->getUsers();
         $statuses = $this->taskService->getStatuses();
+        $labels = $this->taskService->getLabels();
 
-        return view('tasks.create', compact('users', 'statuses'));
+        return view('tasks.create', compact('users', 'statuses', 'labels'));
     }
 
     /**
@@ -76,8 +77,9 @@ class TaskController extends Controller
 
         $users = $this->taskService->getUsers();
         $statuses = $this->taskService->getStatuses();
+        $labels = $this->taskService->getLabels();
 
-        return view('tasks.edit', compact('users', 'statuses', 'task'));
+        return view('tasks.edit', compact('users', 'statuses', 'labels', 'task'));
     }
 
     /**
