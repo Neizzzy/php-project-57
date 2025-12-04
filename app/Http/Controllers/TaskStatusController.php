@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
 class TaskStatusController extends Controller
 {
     public function __construct(
-        private readonly TaskStatusService $service
+        private readonly TaskStatusService $taskStatusService
     ){
     }
     /**
@@ -25,7 +25,7 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('viewAny', TaskStatus::class);
 
-        $statuses = $this->service->getAllPaginated();
+        $statuses = $this->taskStatusService->getAllPaginated();
         return view('task-statuses.index', compact('statuses'));
     }
 
@@ -47,7 +47,7 @@ class TaskStatusController extends Controller
         Gate::authorize('create', TaskStatus::class);
 
         $taskStatusDto = TaskStatusDTO::fromArray($request->validated());
-        $this->service->create($taskStatusDto);
+        $this->taskStatusService->create($taskStatusDto);
 
         flash(__('Status successfully created'))->success();
         return redirect()->route('task_statuses.index');
@@ -71,7 +71,7 @@ class TaskStatusController extends Controller
         Gate::authorize('update', $taskStatus);
 
         $taskStatusDto = TaskStatusDTO::fromArray($request->validated());
-        $this->service->update($taskStatusDto, $taskStatus);
+        $this->taskStatusService->update($taskStatusDto, $taskStatus);
 
         flash(__('Status successfully updated'))->success();
         return redirect()->route('task_statuses.index');
@@ -84,7 +84,7 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('delete', $taskStatus);
 
-        $this->service->delete($taskStatus) ?
+        $this->taskStatusService->delete($taskStatus) ?
             flash(__('Status successfully deleted'))->success() :
             flash(__('Failed to delete status'))->error();
 
