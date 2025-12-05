@@ -8,8 +8,50 @@
                 {{ __('Create task') }}
             </x-link-button>
         @endcan
-        <div
-            class="mt-8 relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white dark:bg-gray-700 shadow-md bg-clip-border rounded-xl">
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold dark:text-gray-200">{{ __('Filter') }}</h2>
+            <div class="mt-2">
+                <form action="{{ route('tasks.index') }}">
+                    <div class="flex flex-col gap-2 items-start">
+                        <div class="flex gap-1 items-center flex-wrap">
+                            <select name="filter[status_id]" id="status_id" class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
+                                <option value="">{{ __('Status') }}</option>
+                                @foreach($statuses as $status)
+                                    <option value="{{ $status->id }}" @selected($status->id == request('filter.status_id'))>
+                                        {{ $status->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select name="filter[created_by_id]" id="created_by_id" class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
+                                <option value="">{{ __('Author') }}</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" @selected($user->id == request('filter.created_by_id'))>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select name="filter[assigned_to_id]" id="assigned_to_id" class="w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-orange-500 dark:focus:border-orange-600 focus:ring-orange-500 dark:focus:ring-orange-600 rounded-md shadow-sm">
+                                <option value="">{{ __('Executor') }}</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" @selected($user->id == request('filter.assigned_to_id'))>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <x-primary-button>
+                                {{ __('Apply') }}
+                            </x-primary-button>
+                            @if(!empty(request('filter')))
+                                <a href="{{ route('tasks.index') }}" class="text-red-600 hover:text-red-800 font-bold text-sm">{{ __('Reset filter') }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mt-4 relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white dark:bg-gray-700 shadow-md bg-clip-border rounded-xl">
             <table class="w-full text-left table-auto">
                 <thead>
                 <tr>

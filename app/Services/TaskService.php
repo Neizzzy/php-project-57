@@ -9,12 +9,20 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskService
 {
-    public function getAllPaginated($per = 15): LengthAwarePaginator
+    public function getPaginatedWithFilter($per = 15): LengthAwarePaginator
     {
-        return Task::orderBy('id', 'ASC')->paginate($per);
+        return QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->paginate($per);
     }
 
     public function getUsers(): Collection

@@ -26,8 +26,11 @@ class TaskController extends Controller
     {
         Gate::authorize('viewAny', Task::class);
 
-        $tasks = $this->taskService->getAllPaginated();
-        return view('tasks.index', compact('tasks'));
+        $tasks = $this->taskService->getPaginatedWithFilter();
+        $statuses = $this->taskService->getStatuses();
+        $users = $this->taskService->getUsers();
+
+        return view('tasks.index', compact('tasks', 'statuses', 'users'));
     }
 
     /**
