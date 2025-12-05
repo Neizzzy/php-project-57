@@ -51,5 +51,8 @@
     "Label successfully created": "Метка успешно создана",
     "Label successfully updated": "Метка успешно изменена",
     "Label successfully deleted": "Метка успешно удалена",
-    "Failed to delete label": "Не удалось удалить метку"
+    "Failed to delete label": "Не удалось удалить метку",
+    "Apply": "Применить",
+    "Reset filter": "Сбросить фильтр",
+    "Filter": "Фильтр"
 }
