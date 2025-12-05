@@ -23,8 +23,8 @@
     "Create status": "Создать статус",
     "Edit status": "Изменение статуса",
     "Status successfully created": "Статус успешно создан",
-    "Status successfully updated": "Статус успешно изменен",
-    "Status successfully deleted": "Статус успешно удален",
+    "Status successfully updated": "Статус успешно изменён",
+    "Status successfully deleted": "Статус успешно удалён",
     "Failed to delete status": "Не удалось удалить статус",
     "Creation date": "Дата создания",
     "Actions": "Действия",
@@ -48,11 +48,15 @@
     "Select executor": "Выберите исполнителя",
     "Labels": "Метки",
     "Create label": "Создать метку",
+    "Edit label": "Изменение метки",
     "Label successfully created": "Метка успешно создана",
     "Label successfully updated": "Метка успешно изменена",
     "Label successfully deleted": "Метка успешно удалена",
     "Failed to delete label": "Не удалось удалить метку",
     "Apply": "Применить",
     "Reset filter": "Сбросить фильтр",
-    "Filter": "Фильтр"
+    "Filter": "Фильтр",
+    "This is a simple task manager on Laravel": "Это простой менеджер задач на Laravel",
+    "Hello from Hexlet!": "Привет от Хекслета!",
+    "Click me": "Нажми меня"
 }
