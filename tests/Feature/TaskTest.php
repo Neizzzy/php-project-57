@@ -28,6 +28,39 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_task_filter_by_status_id()
+    {
+        [$needleTask, $secondTask] = Task::factory()->count(2)->create();
+
+        $response = $this->get(route('tasks.index', "filter[status_id]={$needleTask->status_id}"));
+
+        $response->assertSee($needleTask->name);
+
+        $response->assertDontSee($secondTask->name);
+    }
+
+    public function test_task_filter_by_created_by_id()
+    {
+        [$needleTask, $secondTask] = Task::factory()->count(2)->create();
+
+        $response = $this->get(route('tasks.index', "filter[created_by_id]={$needleTask->created_by_id}"));
+
+        $response->assertSee($needleTask->name);
+
+        $response->assertDontSee($secondTask->name);
+    }
+
+    public function test_task_filter_by_assigned_to_id()
+    {
+        [$needleTask, $secondTask] = Task::factory()->count(2)->create();
+
+        $response = $this->get(route('tasks.index', "filter[assigned_to_id]={$needleTask->assigned_to_id}"));
+
+        $response->assertSee($needleTask->name);
+
+        $response->assertDontSee($secondTask->name);
+    }
+
     public function test_show_index(): void
     {
         $task = Task::factory()->create();
