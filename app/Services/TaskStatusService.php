@@ -27,11 +27,11 @@ class TaskStatusService
 
     public function delete(TaskStatus $taskStatus): bool
     {
-        try {
-            $taskStatus->delete();
-            return true;
-        } catch (QueryException) {
+        if ($taskStatus->tasks()->exists()) {
             return false;
         }
+
+        $taskStatus->delete();
+        return true;
     }
 }
