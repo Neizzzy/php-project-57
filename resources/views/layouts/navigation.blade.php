@@ -33,7 +33,7 @@
                             {{ __('Login') }}
                         </x-link-button>
                         <x-link-button :href="route('register')">
-                            {{ __('Register') }}
+                            {{ __('Registration') }}
                         </x-link-button>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                        {{ __('Register') }}
+                        {{ __('Registration') }}
                     </x-responsive-nav-link>
                 </div>
             @endguest
