@@ -21,7 +21,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $label = $this->route('task_status');
+        $label = $this->route('label');
 
         return [
             'name' => "required|string|max:255|unique:labels,name,$label->id",
