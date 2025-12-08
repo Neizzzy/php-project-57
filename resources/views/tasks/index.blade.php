@@ -131,7 +131,7 @@
                             <td class="p-2">
                                 <div class="flex gap-3">
                                     @can('delete', $task)
-                                        <x-delete-button :route="route('tasks.destroy', $task)">{{ __('Delete') }}</x-delete-button>
+                                        <x-delete-button :href="route('tasks.destroy', $task)">{{ __('Delete') }}</x-delete-button>
                                     @endcan
                                     @can('update', $task)
                                         <a href="{{ route('tasks.edit', $task) }}" class="block text-sm antialiased font-bold leading-normal text-orange-600 hover:text-orange-800">{{ __('Edit') }}</a>

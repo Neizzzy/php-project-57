@@ -69,7 +69,7 @@
                             <td class="p-2">
                                 <div class="flex gap-3">
                                     @can('delete', $label)
-                                        <x-delete-button :route="route('labels.destroy', $label)">{{ __('Delete') }}</x-delete-button>
+                                        <x-delete-button :href="route('labels.destroy', $label)">{{ __('Delete') }}</x-delete-button>
                                     @endcan
                                     @can('update', $label)
                                         <a href="{{ route('labels.edit', $label) }}" class="block text-sm antialiased font-bold leading-normal text-orange-600 hover:text-orange-800">{{ __('Edit') }}</a>
