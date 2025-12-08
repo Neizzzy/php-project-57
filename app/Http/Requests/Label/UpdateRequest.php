@@ -21,9 +21,18 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $label = $this->route('task_status');
+
         return [
-            'name' => 'required|string|max:255',
+            'name' => "required|string|max:255|unique:labels,name,$label->id",
             'description' => 'nullable|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => __('A label with this name already exists'),
         ];
     }
 }
