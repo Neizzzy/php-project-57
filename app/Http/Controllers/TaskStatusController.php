@@ -16,7 +16,7 @@ class TaskStatusController extends Controller
 {
     public function __construct(
         private readonly TaskStatusService $taskStatusService
-    ){
+    ) {
     }
     /**
      * Display a listing of the resource.

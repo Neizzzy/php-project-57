@@ -16,7 +16,7 @@ class TaskController extends Controller
 {
     public function __construct(
         private readonly TaskService $taskService,
-    ){
+    ) {
     }
 
     /**

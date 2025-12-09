@@ -7,7 +7,7 @@ class LabelDTO
     public function __construct(
         public string $name,
         public ?string $description
-    ){
+    ) {
     }
 
     public static function fromArray(array $data): self

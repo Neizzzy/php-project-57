@@ -32,8 +32,7 @@ class TaskTest extends TestCase
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index',
-            "filter[status_id]={$needleTask->status_id}"));
+        $response = $this->get(route('tasks.index', "filter[status_id]={$needleTask->status_id}"));
 
         $response->assertSee($needleTask->name);
 
@@ -44,8 +43,7 @@ class TaskTest extends TestCase
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index',
-            "filter[created_by_id]={$needleTask->created_by_id}"));
+        $response = $this->get(route('tasks.index', "filter[created_by_id]={$needleTask->created_by_id}"));
 
         $response->assertSee($needleTask->name);
 
@@ -56,8 +54,7 @@ class TaskTest extends TestCase
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index',
-            "filter[assigned_to_id]={$needleTask->assigned_to_id}"));
+        $response = $this->get(route('tasks.index', "filter[assigned_to_id]={$needleTask->assigned_to_id}"));
 
         $response->assertSee($needleTask->name);
 

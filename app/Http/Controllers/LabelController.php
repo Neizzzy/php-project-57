@@ -16,7 +16,7 @@ class LabelController extends Controller
 {
     public function __construct(
         private readonly LabelService $labelService,
-    ){
+    ) {
     }
 
     /**
