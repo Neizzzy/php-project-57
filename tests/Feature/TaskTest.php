@@ -21,47 +21,50 @@ class TaskTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function test_task_index(): void
+    public function testTaskIndex(): void
     {
         $response = $this->get(route('tasks.index'));
 
         $response->assertStatus(200);
     }
 
-    public function test_task_filter_by_status_id()
+    public function testTaskFilterByStatusId()
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index', "filter[status_id]={$needleTask->status_id}"));
+        $response = $this->get(route('tasks.index',
+            "filter[status_id]={$needleTask->status_id}"));
 
         $response->assertSee($needleTask->name);
 
         $response->assertDontSee($secondTask->name);
     }
 
-    public function test_task_filter_by_created_by_id()
+    public function testTaskFilterByCreatedById()
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index', "filter[created_by_id]={$needleTask->created_by_id}"));
+        $response = $this->get(route('tasks.index',
+            "filter[created_by_id]={$needleTask->created_by_id}"));
 
         $response->assertSee($needleTask->name);
 
         $response->assertDontSee($secondTask->name);
     }
 
-    public function test_task_filter_by_assigned_to_id()
+    public function testTaskFilterByAssignedToId()
     {
         [$needleTask, $secondTask] = Task::factory()->count(2)->create();
 
-        $response = $this->get(route('tasks.index', "filter[assigned_to_id]={$needleTask->assigned_to_id}"));
+        $response = $this->get(route('tasks.index',
+            "filter[assigned_to_id]={$needleTask->assigned_to_id}"));
 
         $response->assertSee($needleTask->name);
 
         $response->assertDontSee($secondTask->name);
     }
 
-    public function test_show_index(): void
+    public function testShowIndex(): void
     {
         $task = Task::factory()->create();
 
@@ -70,7 +73,7 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_user_can_create_task(): void
+    public function testUserCanCreateTask(): void
     {
         $response = $this->actingAs($this->user)
             ->get(route('tasks.create'));
@@ -78,7 +81,7 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_guest_cannot_create_task(): void
+    public function testGuestCannotCreateTask(): void
     {
         $response = $this->actingAsGuest()
             ->get(route('tasks.create'));
@@ -86,7 +89,7 @@ class TaskTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_user_can_store_task(): void
+    public function testUserCanStoreTask(): void
     {
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
 
@@ -98,7 +101,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', [...$data, 'created_by_id' => $this->user->id]);
     }
 
-    public function test_guest_cannot_store_task(): void
+    public function testGuestCannotStoreTask(): void
     {
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
 
@@ -110,7 +113,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseEmpty('tasks');
     }
 
-    public function test_task_validation(): void
+    public function testTaskValidation(): void
     {
         $response = $this->actingAs($this->user)
             ->post(route('tasks.store'), ['name' => '', 'status_id' => '']);
@@ -122,7 +125,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseEmpty('tasks');
     }
 
-    public function test_user_can_edit_task(): void
+    public function testUserCanEditTask(): void
     {
         $task = Task::factory()->create();
 
@@ -132,7 +135,7 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_guest_cannot_edit_task(): void
+    public function testGuestCannotEditTask(): void
     {
         $task = Task::factory()->create();
 
@@ -142,7 +145,7 @@ class TaskTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_user_can_update_task(): void
+    public function testUserCanUpdateTask(): void
     {
         $task = Task::factory()->create();
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
@@ -155,7 +158,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $task->id, ...$data]);
     }
 
-    public function test_guest_cannot_update_task(): void
+    public function testGuestCannotUpdateTask(): void
     {
         $task = Task::factory()->create();
         $originalName = $task->name;
@@ -169,7 +172,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $task->id, 'name' => $originalName]);
     }
 
-    public function test_author_can_delete_task(): void
+    public function testAuthorCanDeleteTask(): void
     {
         $task = Task::factory()->create(['created_by_id' => $this->user->id]);
 
@@ -181,7 +184,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
 
-    public function test_user_cannot_delete_other_user_task(): void
+    public function testUserCannotDeleteOtherUserTask(): void
     {
         $task = Task::factory()->create();
 
@@ -193,7 +196,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $task->id]);
     }
 
-    public function test_guest_cannot_delete_task(): void
+    public function testGuestCannotDeleteTask(): void
     {
         $task = Task::factory()->create();
 

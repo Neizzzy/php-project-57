@@ -22,14 +22,14 @@ class TaskStatusTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function test_task_status_index(): void
+    public function testTaskStatusIndex(): void
     {
         $response = $this->get(route('task_statuses.index'));
 
         $response->assertStatus(200);
     }
 
-    public function test_user_can_create_task_status(): void
+    public function testUserCanCreateTaskStatus(): void
     {
         $response = $this->actingAs($this->user)
             ->get(route('task_statuses.create'));
@@ -37,7 +37,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_guest_cannot_create_task_status(): void
+    public function testGuestCannotCreateTaskStatus(): void
     {
         $response = $this->actingAsGuest()
             ->get(route('task_statuses.create'));
@@ -45,7 +45,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_user_can_store_task_status(): void
+    public function testUserCanStoreTaskStatus(): void
     {
         $data = TaskStatus::factory()->make()->only('name');
 
@@ -57,7 +57,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
-    public function test_guest_cannot_store_task_status(): void
+    public function testGuestCannotStoreTaskStatus(): void
     {
         $data = TaskStatus::factory()->make()->only('name');
 
@@ -69,7 +69,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseEmpty('task_statuses');
     }
 
-    public function test_task_status_validation(): void
+    public function testTaskStatusValidation(): void
     {
         $response = $this->actingAs($this->user)
             ->post(route('task_statuses.store'), ['name' => '']);
@@ -81,7 +81,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseEmpty('task_statuses');
     }
 
-    public function test_user_can_edit_task_status(): void
+    public function testUserCanEditTaskStatus(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -91,7 +91,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_guest_cannot_edit_task_status(): void
+    public function testGuestCannotEditTaskStatus(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -101,7 +101,7 @@ class TaskStatusTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_user_can_update_task_status(): void
+    public function testUserCanUpdateTaskStatus(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $data = TaskStatus::factory()->make()->only('name');
@@ -114,7 +114,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', ['id' => $taskStatus->id, ...$data]);
     }
 
-    public function test_guest_cannot_update_task_status(): void
+    public function testGuestCannotUpdateTaskStatus(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $originalData = $taskStatus->only('name');
@@ -128,7 +128,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $originalData);
     }
 
-    public function test_user_can_delete_status_without_tasks(): void
+    public function testUserCanDeleteStatusWithoutTasks(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
@@ -140,7 +140,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
     }
 
-    public function test_user_cannot_delete_status_with_tasks()
+    public function testUserCannotDeleteStatusWithTasks()
     {
         $taskStatus = TaskStatus::factory()->create();
         Task::factory()->create(['status_id' => $taskStatus->id]);
@@ -153,7 +153,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', ['id' => $taskStatus->id]);
     }
 
-    public function test_guest_cannot_delete_task_status(): void
+    public function testGuestCannotDeleteTaskStatus(): void
     {
         $taskStatus = TaskStatus::factory()->create();
 
