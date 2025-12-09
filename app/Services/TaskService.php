@@ -42,6 +42,7 @@ class TaskService
 
     public function create(TaskDTO $taskDto): void
     {
+        /** @var Task $task */
         $task = auth()->user()->tasks()->create($taskDto->toArray());
         $task->labels()->attach($taskDto->labelIds);
     }
